@@ -29,4 +29,8 @@ export class ApiService {
   changePassword(username: string, oldPassword: string, newPassword: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/users/change-password`, { username, oldPassword, newPassword });
   }
+
+  createGym(gym: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/gyms`, gym);
+  }
 } 

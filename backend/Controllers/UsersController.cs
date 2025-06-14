@@ -71,7 +71,7 @@ public class UsersController : ControllerBase
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         if (user == null)
             return NotFound(new { message = "User not found" });
-        return Ok(new { user.Username, user.Email, user.Type });
+        return Ok(new { user.Username, user.Email, user.Type, user.Id });
     }
 
     // Hash the password using SHA256
