@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 interface ClassScheduleItem {
   day: string;
@@ -199,7 +200,7 @@ export class DashboardComponent implements OnInit {
   loadUserInfo() {
     const username = localStorage.getItem('currentUser');
     if (username) {
-      this.http.get<any>(`http://localhost:5086/api/users/me?username=${username}`).subscribe({
+      this.http.get<any>(`${environment.apiUrl}/api/users/me?username=${username}`).subscribe({
         next: (data) => {
           this.userId = data.id;
           this.isStudent = data.type === 'student';
@@ -218,7 +219,7 @@ export class DashboardComponent implements OnInit {
     if (this.userId === null) return;
 
     // Load all gyms to find which ones the student has joined
-    this.http.get<any[]>(`http://localhost:5086/api/gyms`).subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/api/gyms`).subscribe({
       next: (gyms) => {
         const joinedGyms = gyms.filter(gym => 
           gym.students && gym.students.includes(this.userId)

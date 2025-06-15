@@ -234,8 +234,8 @@ export class WaiverModalComponent implements AfterViewInit, OnChanges {
   
   private ctx!: CanvasRenderingContext2D;
   private isDrawing = false;
-  private hasSignature = false;
-  private isSubmitting = false;
+  hasSignature = false;
+  isSubmitting = false;
 
   constructor(private apiService: ApiService) {}
 

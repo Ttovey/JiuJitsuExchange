@@ -5,6 +5,7 @@ import { ApiService } from '../../services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { WaiverModalComponent } from '../../components/waiver-modal/waiver-modal.component';
+import { environment } from '../../../environments/environment';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -282,7 +283,7 @@ I HAVE READ THIS RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK AND INDEMNI
     const username = localStorage.getItem('currentUser');
     if (username) {
       this.currentUsername = username;
-      this.http.get<any>(`http://localhost:5086/api/users/me?username=${username}`).subscribe({
+      this.http.get<any>(`${environment.apiUrl}/api/users/me?username=${username}`).subscribe({
         next: (data) => {
           this.ownerUserId = data.id;
           this.currentUserEmail = data.email;
@@ -299,7 +300,7 @@ I HAVE READ THIS RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK AND INDEMNI
 
   loadGyms() {
     if (this.ownerUserId !== null) {
-      this.http.get<any[]>(`http://localhost:5086/api/gyms?ownerUserId=${this.ownerUserId}`).subscribe({
+      this.http.get<any[]>(`${environment.apiUrl}/api/gyms?ownerUserId=${this.ownerUserId}`).subscribe({
         next: (data) => {
           this.gyms = data;
         },
@@ -311,7 +312,7 @@ I HAVE READ THIS RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK AND INDEMNI
   }
 
   loadAvailableGyms() {
-    this.http.get<any[]>(`http://localhost:5086/api/gyms`).subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/api/gyms`).subscribe({
       next: (data) => {
         this.availableGyms = data;
         // Check which gyms the user has already joined

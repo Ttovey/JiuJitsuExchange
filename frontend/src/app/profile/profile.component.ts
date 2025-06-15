@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -101,7 +102,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     const username = localStorage.getItem('currentUser');
     if (username) {
-      this.http.get<any>(`http://localhost:5086/api/users/me?username=${username}`).subscribe({
+      this.http.get<any>(`${environment.apiUrl}/api/users/me?username=${username}`).subscribe({
         next: (data) => {
           this.isGymOwner = data.type === 'gym';
         },

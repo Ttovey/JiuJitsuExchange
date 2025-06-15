@@ -37,4 +37,27 @@ yarn-error.log*
 # Misc
 *.tgz
 .env
-.env.* 
+.env.*
+
+# Azure deployment files
+*.PublishSettings
+*.pubxml
+*.pubxml.user
+
+# Environment specific files
+**/environments/environment.prod.ts.configured
+appsettings.Production.json.configured
+
+# Local database
+backend/app.db* 
+
+#deployment files
+deploy-azure.sh
+deploy-azure.ps1
+deploy-azure.md
+deploy-azure.txt
+deploy-azure.log
+deploy-azure.error
+deploy-azure.warning
+deploy-azure.info
+DEPLOYMENT_SUMMARY.md
