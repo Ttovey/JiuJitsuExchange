@@ -31,6 +31,35 @@ export class ApiService {
   }
 
   createGym(gym: any): Observable<any> {
+    console.log(gym);
     return this.http.post(`${this.apiUrl}/gyms`, gym);
+  }
+
+  updateGym(id: number, gym: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/gyms/${id}?userId=${gym.ownerUserId}`, gym);
+  }
+
+  deleteGym(id: number, ownerUserId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/gyms/${id}?userId=${ownerUserId}`);
+  }
+
+  joinGym(gymId: number, studentId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/gyms/${gymId}/join?studentId=${studentId}`, {});
+  }
+
+  leaveGym(gymId: number, studentId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/gyms/${gymId}/leave?studentId=${studentId}`);
+  }
+
+  signWaiver(waiver: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/waivers`, waiver);
+  }
+
+  checkWaiverSigned(userId: number, gymId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/waivers/check?userId=${userId}&gymId=${gymId}`);
+  }
+
+  getUserWaivers(userId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/waivers/user/${userId}`);
   }
 } 

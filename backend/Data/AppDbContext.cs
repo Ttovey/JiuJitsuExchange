@@ -9,4 +9,5 @@ public class AppDbContext : DbContext
 
     public DbSet<User> Users => Set<User>();
     public DbSet<Gym> Gyms => Set<Gym>();
+    public DbSet<Waiver> Waivers => Set<Waiver>();
 } 

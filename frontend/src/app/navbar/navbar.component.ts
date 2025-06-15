@@ -21,6 +21,8 @@ import { RouterModule, Router } from '@angular/router';
             <span class="bar"></span>
           </button>
           <div class="dropdown-menu" *ngIf="menuOpen">
+            <a (click)="goToDashboard()">Dashboard</a>
+            <a (click)="goToFeed()">Feed</a>
             <a (click)="goToProfile()">Profile</a>
             <a (click)="logout()">Logout</a>
           </div>
@@ -183,6 +185,16 @@ export class NavbarComponent {
 
   goToProfile() {
     this.router.navigate(['/profile']);
+    this.menuOpen = false;
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
+    this.menuOpen = false;
+  }
+
+  goToFeed() {
+    this.router.navigate(['/feed']);
     this.menuOpen = false;
   }
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
         <nav>
           <a routerLink="account" routerLinkActive="active">Profile</a>
           <a routerLink="gym" routerLinkActive="active">Gym</a>
-          <a routerLink="students" routerLinkActive="active">Students</a>
+          <a routerLink="students" routerLinkActive="active" *ngIf="isGymOwner">Students</a>
         </nav>
       </aside>
       <main class="profile-main">
@@ -92,4 +93,22 @@ import { NavbarComponent } from '../navbar/navbar.component';
     `
   ]
 })
-export class ProfileComponent {} 
+export class ProfileComponent implements OnInit {
+  isGymOwner = false;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    const username = localStorage.getItem('currentUser');
+    if (username) {
+      this.http.get<any>(`http://localhost:5086/api/users/me?username=${username}`).subscribe({
+        next: (data) => {
+          this.isGymOwner = data.type === 'gym';
+        },
+        error: (err) => {
+          console.error('Failed to fetch user data:', err);
+        }
+      });
+    }
+  }
+} 

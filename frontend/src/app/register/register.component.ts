@@ -78,7 +78,7 @@ import { RouterModule } from '@angular/router';
               <a routerLink="/login">Already have an account? Login</a>
             </div>
             <div class="toggle-link">
-              <a (click)="goToGymOwner()">Create Gym Owner Account</a>
+              <a (click)="toggleAccountType()">{{ isGymOwner ? 'Create Student Account' : 'Create Gym Owner Account' }}</a>
             </div>
           </form>
           <div *ngIf="message" class="message">{{ message }}</div>
@@ -164,8 +164,12 @@ export class RegisterComponent {
       ? null : { passwordMismatch: true };
   }
 
-  goToGymOwner() {
-    this.router.navigate([], { queryParams: { type: 'gym' } });
+  toggleAccountType() {
+    if (this.isGymOwner) {
+      this.router.navigate(['/register']);
+    } else {
+      this.router.navigate([], { queryParams: { type: 'gym' } });
+    }
   }
 
   onRegister() {
